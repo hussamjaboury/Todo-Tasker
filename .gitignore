@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# dist
+dist/
+
+# system files
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+
+# environment
+.env

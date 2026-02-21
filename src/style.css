@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-primary;
+}
+
+input:focus {
+  @apply outline-none;
+}
+
+/* reused styles */
+.btn {
+  @apply cursor-pointer
+  px-3;
+}
+
+/* Styles */
+.aside.active {
+  @apply translate-x-0;
+}
+.navbar_item {
+  @apply text-white
+  min-w-52
+  px-3
+  py-2
+  rounded-lg
+  flex
+  gap-3
+  items-center
+  cursor-pointer
+  duration-300;
+}
+.navbar_item:hover {
+  @apply bg-white_10
+}
+.navbar_item.active {
+  @apply bg-Vivid_Violet;
+}
+.header .overlay {
+  @apply w-screen
+  h-screen
+  z-40
+  inset-0
+  fixed
+  invisible
+  backdrop-blur-sm
+  duration-200
+  opacity-0;
+}
+.header .overlay.active {
+  @apply opacity-100
+  visible;
+}

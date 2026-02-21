@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=100, initial-scale=1.0" />
+  <!--
+    - primary meta tags
+    -->
+  <title>Taskly - organize your tasks</title>
+  <meta name="title" content="Taskly - organize your tasks" />
+  <meta name="description" content="Taskly app to organize your tasks" />
+
+  <!--
+    -favicon
+  -->
+  <link rel="shortcut icon" href="./images/icons8-to-do-list-100.png" type="image/x-icon" />
+
+  <!-- 
+      - google fonts 
+    -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
+
+  <!--
+      -font awesome
+    -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- 
+    - css link
+  -->
+  <link href="./dist/style.css" rel="stylesheet" />
+  <title>Taskly</title>
+</head>
+
+<body>
+
+  <div class="flex min-h-screen">
+    <div class="flex-1">
+      <!--
+    - Header section start
+    -->
+      <header class="header fixed w-full indent-0 bg-Deep_Midnight z-30 md:relative md:h-fit">
+        <div class="container mx-auto px-4 py-3">
+          <div class="flex items-center justify-center gap-5">
+            <!-- search bar -->
+            <div
+              class="search-bar flex flex-1 relative items-center bg-[#281d2d] rounded-xl overflow-hidden border border-white_10 my-auto">
+              <input type="text" class="flex-1 relative z-10 pl-8 py-2 bg-white_5 text-white placeholder:text-[#68606C]"
+                placeholder="Search tasks" />
+              <i class="fas fa-search absolute left-2 z-[1] text-white_30"></i>
+            </div>
+            <!-- add task button -->
+            <button aria-label="add task button"
+              class="add_task btn bg-Vivid_Violet rounded-lg py-[7px] text-white flex gap-1 items-center duration-200 hover:brightness-110" data-add-task>
+              <i class="fa-solid fa-plus"></i>
+              Add Task
+            </button>
+            <i class="fa-solid fa-bars text-white cursor-pointer text-xl p-1 md:hidden" data-nav-toggler></i>
+          </div>
+
+          <div class="overlay md:hidden" data-overlay data-nav-toggler></div>
+        </div>
+      </header>
+      <!--
+        -Main Content
+      -->
+      <main></main>
+    </div>
+
+    <!--
+      -Aside Section
+    -->
+    <aside
+      class="aside fixed inset-y-0 right-0 w-72 bg-Deep_Midnight p-6 z-50 translate-x-full transition-transform duration-300 md:relative md:translate-x-0 md:w-64"
+      data-navbar>
+      <div class="navtop flex items-center gap-3">
+        <!-- logo -->
+        <div class="logo bg-Vivid_Violet p-2 rounded-lg grid place-items-center">
+          <div
+            class="flex items-center justify-center w-6 h-6 border border-white rounded-full bg-Vivid_Violet text-white">
+            <a href=""><i class="fa-solid fa-check"></i></a>
+          </div>
+        </div>
+        <h2 class="text-white bold text-2xl grid items-center"><a href="">Tasker</a></h2>
+        <i class="fa-solid fa-circle-xmark text-white ml-auto text-xl cursor-pointer p-1 md:hidden"
+          data-nav-toggler></i>
+      </div>
+
+      <!-- navbar -->
+      <div class="mt-8">
+        <p class="capitalize text-[rgba(175,37,244,0.6)]">Main Navigation</p>
+        <ul class="navbar_list mt-2 flex flex-col gap-3">
+          <li class="">
+            <a href="" class="navbar_item active"><i class="fa-solid fa-calendar"></i>Today</a>
+          </li>
+          <li class="">
+            <a href="" class="navbar_item"><i class="fa-regular fa-calendar-plus"></i>Upcoming</a>
+
+          </li>
+          <li>
+            <a href="" class="navbar_item"><i class="fa-solid fa-circle-check"></i>Completed</a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+
+  <script src="./js/main.js" defer></script>
+</body>
+
+</html>
