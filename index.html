@@ -1,114 +1,397 @@
 <!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=100, initial-scale=1.0" />
-  <!--
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=100, initial-scale=1.0" />
+    <!--
     - primary meta tags
     -->
-  <title>Taskly - organize your tasks</title>
-  <meta name="title" content="Taskly - organize your tasks" />
-  <meta name="description" content="Taskly app to organize your tasks" />
-
-  <!--
-    -favicon
-  -->
-  <link rel="shortcut icon" href="./images/icons8-to-do-list-100.png" type="image/x-icon" />
-
-  <!-- 
-      - google fonts 
-    -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
-
-  <!--
-      -font awesome
-    -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <!-- 
-    - css link
-  -->
-  <link href="./dist/style.css" rel="stylesheet" />
-  <title>Taskly</title>
-</head>
-
-<body>
-
-  <div class="flex min-h-screen">
-    <div class="flex-1">
-      <!--
-    - Header section start
-    -->
-      <header class="header fixed w-full indent-0 bg-Deep_Midnight z-30 md:relative md:h-fit">
-        <div class="container mx-auto px-4 py-3">
-          <div class="flex items-center justify-center gap-5">
-            <!-- search bar -->
-            <div
-              class="search-bar flex flex-1 relative items-center bg-[#281d2d] rounded-xl overflow-hidden border border-white_10 my-auto">
-              <input type="text" class="flex-1 relative z-10 pl-8 py-2 bg-white_5 text-white placeholder:text-[#68606C]"
-                placeholder="Search tasks" />
-              <i class="fas fa-search absolute left-2 z-[1] text-white_30"></i>
-            </div>
-            <!-- add task button -->
-            <button aria-label="add task button"
-              class="add_task btn bg-Vivid_Violet rounded-lg py-[7px] text-white flex gap-1 items-center duration-200 hover:brightness-110" data-add-task>
-              <i class="fa-solid fa-plus"></i>
-              Add Task
-            </button>
-            <i class="fa-solid fa-bars text-white cursor-pointer text-xl p-1 md:hidden" data-nav-toggler></i>
-          </div>
-
-          <div class="overlay md:hidden" data-overlay data-nav-toggler></div>
-        </div>
-      </header>
-      <!--
-        -Main Content
-      -->
-      <main></main>
-    </div>
+    <title>Taskly - organize your tasks</title>
+    <meta name="title" content="Taskly - organize your tasks" />
+    <meta name="description" content="Taskly app to organize your tasks" />
 
     <!--
-      -Aside Section
+    -favicon
+  -->
+    <link
+      rel="shortcut icon"
+      href="./images/icons8-to-do-list-100.png"
+      type="image/x-icon"
+    />
+
+    <!-- 
+      - google fonts 
     -->
-    <aside
-      class="aside fixed inset-y-0 right-0 w-72 bg-Deep_Midnight p-6 z-50 translate-x-full transition-transform duration-300 md:relative md:translate-x-0 md:w-64"
-      data-navbar>
-      <div class="navtop flex items-center gap-3">
-        <!-- logo -->
-        <div class="logo bg-Vivid_Violet p-2 rounded-lg grid place-items-center">
-          <div
-            class="flex items-center justify-center w-6 h-6 border border-white rounded-full bg-Vivid_Violet text-white">
-            <a href=""><i class="fa-solid fa-check"></i></a>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--
+      -font awesome
+    -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- 
+    - css link
+  -->
+    <link href="./dist/style.css" rel="stylesheet" />
+    <title>Taskly</title>
+  </head>
+
+  <body
+    class="bg-background_light dark:bg-background_dark text-slate-900 dark:text-slate-100 min-h-screen relative overflow-hidden"
+  >
+    <!--
+    - Background Image layer
+  -->
+    <div
+      class="fixed z-0 inset-0 bg-[url('../images/background-img.png')] bg-cover bg-center bg-no-repeat opacity-40"
+    ></div>
+    <div class="flex relative h-screen z-10">
+      <main class="flex-1">
+        <!--
+    - Header section start
+    -->
+        <header
+          class="header w-full inset-0 bg-Soft_Lavender dark:bg-Deep_Midnight z-30 relative"
+        >
+          <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-center gap-5">
+              <!-- search bar -->
+              <div
+                class="search-bar flex flex-1 relative items-center bg-[#281d2d] rounded-xl overflow-hidden border border-white_10 my-auto"
+              >
+                <input
+                  type="text"
+                  class="flex-1 relative text-sm md:text-base z-10 pl-8 py-[7px] md:py-2 bg-white_5 text-white placeholder:text-[#68606C]"
+                  placeholder="Search tasks"
+                />
+                <i
+                  class="fas fa-search absolute left-2 z-[1] text-white_30"
+                ></i>
+              </div>
+              <!-- add task button -->
+              <button
+                aria-label="add task button"
+                class="add_task btn bg-Vivid_Violet rounded-lg py-[7px] flex gap-1 items-center duration-200 hover:brightness-110 text-sm md:text-base"
+                data-add-task
+              >
+                <i class="fa-solid fa-plus"></i>
+                Add Task
+              </button>
+              <i
+                class="fa-solid fa-bars text-white cursor-pointer text-xl p-1 md:hidden"
+                data-nav-toggler
+              ></i>
+            </div>
+
+            <div class="overlay md:hidden" data-overlay data-nav-toggler></div>
+          </div>
+        </header>
+        <!--
+        -Main Content
+      -->
+        <div class="custom-scrollbar overflow-auto h-full pb-24">
+          <div class="container mx-auto p-5 lg:p-10 flex flex-col gap-10">
+            <div>
+              <h2 class="font-bold text-2xl">Today's Focus</h2>
+              <p class="mt-1 text-white_40">
+                Manage your daily goals and priorities
+              </p>
+            </div>
+            <div
+              class="flex justify-between items-center pb-4 border-b border-white_10"
+            >
+              <div class="bg-white_10 p-[6px] w-fit rounded-2xl">
+                <button class="task-option active">all tasks</button>
+                <button class="task-option">active</button>
+                <button class="task-option">done</button>
+              </div>
+              <div class="sort_by relative flex gap-3 items-center">
+                <span class="uppercase text-xs text-white_40 font-bold"
+                  >sort by:</span
+                >
+                <select
+                  name="sort"
+                  id="sort-select"
+                  class="hidden bg-transparent text-[rgb(175_37_244)]"
+                >
+                  <option value="test">test</option>
+                  <button>test two</button>
+                </select>
+
+                <!-- custom select -->
+                <div class="custom-select" data-custom-select>
+                  <span
+                    class="result flex gap-1 items-center cursor-pointer text-[rgb(175_37_244)] font-bold uppercase text-xs md:text-sm"
+                    >priority
+                    <span
+                      class="arrow inline-block rotate-[270deg] duration-200"
+                      data-select-arrow
+                      >&lt</span
+                    ></span
+                  >
+                  <ul
+                    class="duration-200 scale-y-0 absolute left-0 w-full origin-top top-[calc(100%+10px)] overflow-hidden rounded-lg"
+                    data-select-list
+                  >
+                    <li class="select-element">priority</li>
+                    <li class="select-element">date</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="tasks pt-5 flex flex-col gap-4">
+              <!--
+              -task one
+            -->
+              <div class="task group">
+                <div
+                  class="flex group items-center gap-5 bg-white_5 rounded-lg p-5 border duration-100 border-white_10 group-has-[input:checked]:bg-white_2"
+                >
+                  <label
+                    class="relative peer group cursor-pointer flex items-center justify-center"
+                  >
+                    <input
+                      type="checkbox"
+                      class="appearance-none size-6 rounded-md border-2 cursor-pointer urgent"
+                    />
+                    <i
+                      class="fa-solid fa-check absolute opacity-0 group-has-[:checked]:opacity-100 duration-200"
+                    ></i>
+                  </label>
+
+                  <div class="">
+                    <div class="flex justify-between sm:gap-3 items-center">
+                      <h3
+                        class="task-title text-sm sm:text-base font-bold duration-200 group-has-[input:checked]:line-through group-has-[input:checked]:text-white_40"
+                      >
+                        Project Proposal Revamp
+                      </h3>
+                    </div>
+                    <p
+                      class="text-xs sm:text-sm text-white_40 font-medium mt-0.5 duration-100 group-has-[:checked]:text-white_20"
+                    >
+                      Finish the final draft for the stakeholder meeting on
+                      Thursday.
+                    </p>
+                  </div>
+
+                  <div class="flex flex-col gap-3 sm:flex-1 items-end">
+                    <span
+                      class="urgent text-center text-[10px] font-extrabold uppercase py-0.5 px-2 rounded text-primary bg-primary/10 border border-primary/20"
+                      >urgent
+                    </span>
+                    <div
+                      class="task_controls text-white text-xs sm:text-base flex-1 flex items-center justify-end gap-2 sm:opacity-0 group-hover:opacity-100 duration-200"
+                    >
+                      <button
+                        class="delete size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-red_500/20 hover:text-red_500"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                      <button
+                        class="edit size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-primary/20 hover:text-primary"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--
+              -task two
+            -->
+              <div class="task group">
+                <div
+                  class="flex group items-center gap-5 bg-white_5 rounded-lg p-5 border duration-100 border-white_10 group-has-[input:checked]:bg-white_2"
+                >
+                  <label
+                    class="relative peer group cursor-pointer flex items-center justify-center"
+                  >
+                    <input
+                      type="checkbox"
+                      class="appearance-none size-6 rounded-md border-2 cursor-pointer normal"
+                    />
+                    <i
+                      class="fa-solid fa-check absolute opacity-0 group-has-[:checked]:opacity-100 duration-200"
+                    ></i>
+                  </label>
+
+                  <div class="">
+                    <div class="flex justify-between sm:gap-3 items-center">
+                      <h3
+                        class="task-title text-sm sm:text-base font-bold duration-200 group-has-[input:checked]:line-through group-has-[input:checked]:text-white_40"
+                      >
+                        Project Proposal Revamp
+                      </h3>
+                    </div>
+                    <p
+                      class="text-xs sm:text-sm text-white_40 font-medium mt-0.5 duration-100 group-has-[:checked]:text-white_20"
+                    >
+                      Finish the final draft for the stakeholder meeting on
+                      Thursday.
+                    </p>
+                  </div>
+
+                  <div class="flex flex-col gap-3 sm:flex-1 items-end">
+                    <span
+                      class="normal text-center text-[10px] font-extrabold uppercase py-0.5 px-2 rounded text-primary bg-primary/10 border border-primary/20"
+                      >normal
+                    </span>
+                    <div
+                      class="task_controls text-white text-xs sm:text-base flex-1 flex items-center justify-end gap-2 sm:opacity-0 group-hover:opacity-100 duration-200"
+                    >
+                      <button
+                        class="delete size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-red_500/20 hover:text-red_500"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                      <button
+                        class="edit size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-primary/20 hover:text-primary"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--
+              -task three
+            -->
+              <div class="task group">
+                <div
+                  class="flex group items-center gap-5 bg-white_5 rounded-lg p-5 border duration-100 border-white_10 group-has-[input:checked]:bg-white_2"
+                >
+                  <label
+                    class="relative peer group cursor-pointer flex items-center justify-center"
+                  >
+                    <input
+                      type="checkbox"
+                      class="appearance-none size-6 rounded-md border-2 cursor-pointer important"
+                    />
+                    <i
+                      class="fa-solid fa-check absolute opacity-0 group-has-[:checked]:opacity-100 duration-200"
+                    ></i>
+                  </label>
+
+                  <div class="">
+                    <div class="flex justify-between sm:gap-3 items-center">
+                      <h3
+                        class="task-title text-sm sm:text-base font-bold duration-200 group-has-[input:checked]:line-through group-has-[input:checked]:text-white_40"
+                      >
+                        Project Proposal Revamp
+                      </h3>
+                    </div>
+                    <p
+                      class="text-xs sm:text-sm text-white_40 font-medium mt-0.5 duration-100 group-has-[:checked]:text-white_20"
+                    >
+                      Finish the final draft for the stakeholder meeting on
+                      Thursday.
+                    </p>
+                  </div>
+
+                  <div class="flex flex-col gap-3 sm:flex-1 items-end">
+                    <span
+                      class="important text-center text-[10px] font-extrabold uppercase py-0.5 px-2 rounded text-primary bg-primary/10 border border-primary/20"
+                      >important
+                    </span>
+                    <div
+                      class="task_controls text-white text-xs sm:text-base flex-1 flex items-center justify-end gap-2 sm:opacity-0 group-hover:opacity-100 duration-200"
+                    >
+                      <button
+                        class="delete size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-red_500/20 hover:text-red_500"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                      <button
+                        class="edit size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-primary/20 hover:text-primary"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="add-task">
+                <button
+                  class="group flex flex-col items-center gap-2 w-full rounded-lg p-5 border-2 border-dashed duration-200 border-white_10 group-has-[input:checked]:bg-white_2 hover:bg-white_2 hover:border-primary/50"
+                  data-add-task
+                >
+                  <div
+                    class="plus-icon text-3xl size-11 rounded-full bg-white_5 flex items-center justify-center duration-200 group-hover:text-primary group-hover:bg-primary/20"
+                  >
+                    <span class="">+</span>
+                  </div>
+
+                  <p
+                    class="text-white_30 text-sm font-bold duration-200 group-hover:text-white/60"
+                  >
+                    Create a new task
+                  </p>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <h2 class="text-white bold text-2xl grid items-center"><a href="">Tasker</a></h2>
-        <i class="fa-solid fa-circle-xmark text-white ml-auto text-xl cursor-pointer p-1 md:hidden"
-          data-nav-toggler></i>
-      </div>
+      </main>
 
-      <!-- navbar -->
-      <div class="mt-8">
-        <p class="capitalize text-[rgba(175,37,244,0.6)]">Main Navigation</p>
-        <ul class="navbar_list mt-2 flex flex-col gap-3">
-          <li class="">
-            <a href="" class="navbar_item active"><i class="fa-solid fa-calendar"></i>Today</a>
-          </li>
-          <li class="">
-            <a href="" class="navbar_item"><i class="fa-regular fa-calendar-plus"></i>Upcoming</a>
+      <!--
+      -Aside Section
+    -->
+      <aside
+        class="aside fixed inset-y-0 right-0 border-l border-white/10 w-72 bg-Soft_Lavender dark:bg-Deep_Midnight/100 p-6 z-50 translate-x-full transition-transform duration-300 md:relative md:translate-x-0 lg:w-80"
+        data-navbar
+      >
+        <div class="navtop flex items-center gap-3">
+          <!-- logo -->
+          <div
+            class="logo bg-Vivid_Violet p-2 rounded-lg grid place-items-center"
+          >
+            <div
+              class="flex items-center justify-center w-6 h-6 border border-white rounded-full bg-Vivid_Violet"
+            >
+              <a href=""><i class="fa-solid fa-check"></i></a>
+            </div>
+          </div>
+          <h2 class="bold text-2xl grid items-center">
+            <a href="">Tasker</a>
+          </h2>
+          <i
+            class="fa-solid fa-circle-xmark ml-auto text-xl cursor-pointer p-1 md:hidden"
+            data-nav-toggler
+          ></i>
+        </div>
 
-          </li>
-          <li>
-            <a href="" class="navbar_item"><i class="fa-solid fa-circle-check"></i>Completed</a>
-          </li>
-        </ul>
-      </div>
-    </aside>
-  </div>
-
-
-  <script src="./js/main.js" defer></script>
-</body>
-
+        <!-- navbar -->
+        <div class="mt-8">
+          <p class="capitalize text-[rgba(175,37,244,0.6)]">Main Navigation</p>
+          <ul class="navbar_list mt-2 flex flex-col gap-3">
+            <li class="">
+              <a href="" class="navbar_item active"
+                ><i class="fa-solid fa-calendar"></i>Today</a
+              >
+            </li>
+            <li class="">
+              <a href="" class="navbar_item"
+                ><i class="fa-regular fa-calendar-plus"></i>Upcoming</a
+              >
+            </li>
+            <li>
+              <a href="" class="navbar_item"
+                ><i class="fa-solid fa-circle-check"></i>Completed</a
+              >
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+    <script src="./js/main.js" defer></script>
+  </body>
 </html>

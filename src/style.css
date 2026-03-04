@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 body {
   @apply font-primary;
 }
@@ -10,10 +12,52 @@ input:focus {
   @apply outline-none;
 }
 
+select:focus {
+  @apply outline-none;
+}
+
+select > option {
+  @apply text-red;
+}
+
 /* reused styles */
 .btn {
   @apply cursor-pointer
   px-3;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  @apply w-2;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-[#3c2249] rounded-full;
+}
+/* urgent styles  */
+span.urgent {
+  @apply bg-red_500/20
+  text-red_400
+  border-red_500/20;
+}
+input.urgent {
+  @apply border-red_500/50 checked:bg-red_500 checked:border-red_500;
+}
+
+/* important styles */
+span.important {
+  @apply bg-yellow_500/20 text-yellow_400 border-yellow_500/20;
+}
+
+input.important {
+  @apply border-yellow_500/50 checked:bg-yellow_500/80 checked:border-yellow_500;
+}
+
+/* normal styles */
+
+span.normal {
+  @apply bg-green_500/20 text-green_400 border-green_500/20;
+}
+
+input.normal {
+  @apply border-green_500/50 checked:bg-green_500/80 checked:border-green_500;
 }
 
 /* Styles */
@@ -21,8 +65,7 @@ input:focus {
   @apply translate-x-0;
 }
 .navbar_item {
-  @apply text-white
-  min-w-52
+  @apply min-w-52
   px-3
   py-2
   rounded-lg
@@ -33,7 +76,7 @@ input:focus {
   duration-300;
 }
 .navbar_item:hover {
-  @apply bg-white_10
+  @apply bg-white_10;
 }
 .navbar_item.active {
   @apply bg-Vivid_Violet;
@@ -52,4 +95,21 @@ input:focus {
 .header .overlay.active {
   @apply opacity-100
   visible;
+}
+/* task-options */
+.task-option {
+  @apply px-[10px] md:px-4 py-2  text-white_40 rounded-xl duration-200 text-xs md:text-sm capitalize;
+}
+.task-option.active {
+  @apply text-white bg-Vivid_Violet;
+}
+.task-option:hover {
+  @apply text-white;
+}
+/* custom select */
+.arrow.active {
+  @apply rotate-[180deg];
+}
+.select-element {
+  @apply cursor-pointer py-2 px-3 bg-Vivid_Violet hover:bg-Vivid_Violet/85 duration-200 text-sm capitalize;
 }
