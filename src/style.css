@@ -31,7 +31,7 @@ select > option {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-[#3c2249] rounded-full;
 }
-/* urgent styles  */
+/* urgent task styles  */
 span.urgent {
   @apply bg-red_500/20
   text-red_400
@@ -41,7 +41,7 @@ input.urgent {
   @apply border-red_500/50 checked:bg-red_500 checked:border-red_500;
 }
 
-/* important styles */
+/* important task styles */
 span.important {
   @apply bg-yellow_500/20 text-yellow_400 border-yellow_500/20;
 }
@@ -50,7 +50,7 @@ input.important {
   @apply border-yellow_500/50 checked:bg-yellow_500/80 checked:border-yellow_500;
 }
 
-/* normal styles */
+/* normal task styles */
 
 span.normal {
   @apply bg-green_500/20 text-green_400 border-green_500/20;
@@ -81,10 +81,11 @@ input.normal {
 .navbar_item.active {
   @apply bg-Vivid_Violet;
 }
-.header .overlay {
+.overlay {
   @apply w-screen
   h-screen
-  z-40
+  z-30
+  md:z-[41]
   inset-0
   fixed
   invisible
@@ -92,7 +93,7 @@ input.normal {
   duration-200
   opacity-0;
 }
-.header .overlay.active {
+.overlay.active {
   @apply opacity-100
   visible;
 }
@@ -110,6 +111,65 @@ input.normal {
 .arrow.active {
   @apply rotate-[180deg];
 }
+.custom-select {
+  @apply cursor-pointer;
+}
+.custom-select .result {
+  @apply flex gap-1 items-center cursor-pointer text-[rgb(175_37_244)] font-bold uppercase text-xs md:text-sm;
+}
+.select_list {
+  @apply duration-200  absolute left-0 w-full origin-top top-[calc(100%+10px)] overflow-hidden rounded-lg;
+}
 .select-element {
   @apply cursor-pointer py-2 px-3 bg-Vivid_Violet hover:bg-Vivid_Violet/85 duration-200 text-sm capitalize;
+}
+
+/* modal */
+.modal {
+  @apply top-1/2 
+  left-1/2 
+  -translate-x-1/2 
+  -translate-y-1/2
+  w-full 
+  max-w-md
+  scale-0 
+  opacity-0
+  transition-all 
+  duration-300 
+  z-40 
+  md:z-[42]
+  px-5
+  sm:p-0;
+}
+.modal-container {
+  @apply bg-Soft_Lavender 
+  dark:bg-Deep_Midnight 
+  rounded-lg;
+}
+.modal.active {
+  @apply scale-100 opacity-100;
+}
+
+.modal .input_label {
+  @apply text-sm text-slate-300 block;
+}
+.modal input[type="text"]::placeholder,
+.modal textarea::placeholder {
+  @apply text-slate-500;
+}
+.modal input[type="text"],
+.modal textarea,
+.modal input[type="date"],
+.category {
+  @apply p-2 pl-3 w-full bg-white_5 rounded-lg text-base focus:outline-none focus:outline-Vivid_Violet;
+}
+
+.modal input[type="date"]::-webkit-calendar-picker-indicator {
+  @apply invert;
+}
+
+/* modal priorty  */
+
+.priorty-btn {
+  @apply flex items-center justify-center gap-2 py-2 px-3 sm:py-3 sm:px-4 bg-white_5 rounded-lg border border-white_10 cursor-pointer text-xs sm:text-sm capitalize hover:bg-white_10 text-slate-400 h-full w-full;
 }

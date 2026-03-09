@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" class="dark select-none">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=100, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--
     - primary meta tags
     -->
@@ -40,7 +40,6 @@
     - css link
   -->
     <link href="./dist/style.css" rel="stylesheet" />
-    <title>Taskly</title>
   </head>
 
   <body
@@ -52,13 +51,16 @@
     <div
       class="fixed z-0 inset-0 bg-[url('../images/background-img.png')] bg-cover bg-center bg-no-repeat opacity-40"
     ></div>
+    <!--
+    -content
+  -->
     <div class="flex relative h-screen z-10">
       <main class="flex-1">
         <!--
     - Header section start
     -->
         <header
-          class="header w-full inset-0 bg-Soft_Lavender dark:bg-Deep_Midnight z-30 relative"
+          class="header w-full inset-0 bg-Soft_Lavender dark:bg-Deep_Midnight z-30"
         >
           <div class="container mx-auto px-4 py-3">
             <div class="flex items-center justify-center gap-5">
@@ -79,18 +81,15 @@
               <button
                 aria-label="add task button"
                 class="add_task btn bg-Vivid_Violet rounded-lg py-[7px] flex gap-1 items-center duration-200 hover:brightness-110 text-sm md:text-base"
-                data-add-task
+                data-modal-active
               >
                 <i class="fa-solid fa-plus"></i>
                 Add Task
               </button>
-              <i
-                class="fa-solid fa-bars text-white cursor-pointer text-xl p-1 md:hidden"
-                data-nav-toggler
-              ></i>
+              <button class="md:hidden" data-nav-active>
+                <i class="fa-solid fa-bars text-white text-xl p-1"></i>
+              </button>
             </div>
-
-            <div class="overlay md:hidden" data-overlay data-nav-toggler></div>
           </div>
         </header>
         <!--
@@ -121,14 +120,13 @@
                   id="sort-select"
                   class="hidden bg-transparent text-[rgb(175_37_244)]"
                 >
-                  <option value="test">test</option>
-                  <button>test two</button>
+                  <option value="priority">priority</option>
+                  <option value="date">date</option>
                 </select>
 
                 <!-- custom select -->
                 <div class="custom-select" data-custom-select>
-                  <span
-                    class="result flex gap-1 items-center cursor-pointer text-[rgb(175_37_244)] font-bold uppercase text-xs md:text-sm"
+                  <span class="result"
                     >priority
                     <span
                       class="arrow inline-block rotate-[270deg] duration-200"
@@ -136,10 +134,7 @@
                       >&lt</span
                     ></span
                   >
-                  <ul
-                    class="duration-200 scale-y-0 absolute left-0 w-full origin-top top-[calc(100%+10px)] overflow-hidden rounded-lg"
-                    data-select-list
-                  >
+                  <ul class="select_list scale-y-0" data-select-list>
                     <li class="select-element">priority</li>
                     <li class="select-element">date</li>
                   </ul>
@@ -322,7 +317,7 @@
               <div class="add-task">
                 <button
                   class="group flex flex-col items-center gap-2 w-full rounded-lg p-5 border-2 border-dashed duration-200 border-white_10 group-has-[input:checked]:bg-white_2 hover:bg-white_2 hover:border-primary/50"
-                  data-add-task
+                  data-modal-active
                 >
                   <div
                     class="plus-icon text-3xl size-11 rounded-full bg-white_5 flex items-center justify-center duration-200 group-hover:text-primary group-hover:bg-primary/20"
@@ -345,53 +340,255 @@
       <!--
       -Aside Section
     -->
-      <aside
-        class="aside fixed inset-y-0 right-0 border-l border-white/10 w-72 bg-Soft_Lavender dark:bg-Deep_Midnight/100 p-6 z-50 translate-x-full transition-transform duration-300 md:relative md:translate-x-0 lg:w-80"
-        data-navbar
-      >
-        <div class="navtop flex items-center gap-3">
-          <!-- logo -->
-          <div
-            class="logo bg-Vivid_Violet p-2 rounded-lg grid place-items-center"
-          >
+      <div>
+        <aside
+          class="aside fixed inset-y-0 right-0 border-l border-white/10 min-h-screen w-72 bg-Soft_Lavender dark:bg-Deep_Midnight/100 p-6 z-40 translate-x-full transition-transform duration-300 md:relative md:translate-x-0 lg:w-80"
+          data-navbar
+        >
+          <div class="navtop flex items-center gap-3">
+            <!-- logo -->
             <div
-              class="flex items-center justify-center w-6 h-6 border border-white rounded-full bg-Vivid_Violet"
+              class="logo bg-Vivid_Violet p-2 rounded-lg grid place-items-center"
             >
-              <a href=""><i class="fa-solid fa-check"></i></a>
+              <div
+                class="flex items-center justify-center w-6 h-6 border border-white rounded-full bg-Vivid_Violet"
+              >
+                <a href=""><i class="fa-solid fa-check"></i></a>
+              </div>
+            </div>
+            <h2 class="bold text-2xl grid items-center">
+              <a href="">Tasker</a>
+            </h2>
+            <button class="ml-auto md:hidden" data-nav-close>
+              <i class="fa-solid fa-circle-xmark text-xl p-1"></i>
+            </button>
+          </div>
+
+          <!-- navbar -->
+          <div class="mt-8">
+            <p class="capitalize text-[rgba(175,37,244,0.6)]">
+              Main Navigation
+            </p>
+            <ul class="navbar_list mt-2 flex flex-col gap-3">
+              <li class="">
+                <a href="" class="navbar_item active"
+                  ><i class="fa-solid fa-calendar"></i>Today</a
+                >
+              </li>
+              <li class="">
+                <a href="" class="navbar_item"
+                  ><i class="fa-regular fa-calendar-plus"></i>Upcoming</a
+                >
+              </li>
+              <li>
+                <a href="" class="navbar_item"
+                  ><i class="fa-solid fa-circle-check"></i>Completed</a
+                >
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <!--
+    - add task modal
+  -->
+        <div class="modal absolute" data-modal>
+          <div class="modal-container">
+            <!-- modal header -->
+            <div
+              class="modal_header flex justify-between border-b border-white_10 p-5"
+            >
+              <div class="flex items-center gap-2">
+                <div class="p-[4px_10px] bg-primary/20 rounded-lg text-primary">
+                  <i class="fas fa-edit"></i>
+                </div>
+                <p>add task</p>
+              </div>
+              <button
+                class="text-slate-400 rounded-full size-8 text-xl duration-150 hover:text-white hover:bg-white_5"
+                data-modal-close
+              >
+                <i class="fas fa-close"></i>
+              </button>
+            </div>
+
+            <!--
+            -modal form
+          -->
+
+            <div>
+              <form action="">
+                <div
+                  class="custom-scrollbar p-5 space-y-6 max-h-[50vh] overflow-y-auto"
+                >
+                  <!-- task title -->
+                  <div class="space-y-2">
+                    <label class="input_label" for="task-title"
+                      >Task Title</label
+                    >
+                    <input
+                      type="text"
+                      id="task-title"
+                      placeholder="What needs to be done"
+                    />
+                  </div>
+                  <!-- Description -->
+                  <div class="space-y-2">
+                    <label class="input_label" for="task-description"
+                      >Description</label
+                    >
+                    <textarea
+                      name="input-description"
+                      id="task-description"
+                      rows="3"
+                      placeholder="Add more details about this task"
+                      class="resize-none"
+                    ></textarea>
+                  </div>
+                  <!-- category and date -->
+                  <div class="flex items-center gap-5">
+                    <!-- date -->
+                    <div class="space-y-2 flex-1">
+                      <label class="input_label" for="task-date"
+                        >Due Date</label
+                      >
+                      <input
+                        type="date"
+                        id="task-date"
+                        class="bg-transparent text-sm"
+                      />
+                    </div>
+                    <!--  category  -->
+                    <div class="space-y-2 flex-1">
+                      <label class="input_label inline-block">Category</label>
+                      <!-- custom select -->
+                      <div class="category relative !p-0">
+                        <div class="custom-select !p-[13px]" data-custom-select>
+                          <span class="result"
+                            >Work
+                            <span
+                              class="arrow inline-block rotate-[270deg] duration-200"
+                              data-select-arrow
+                              >&lt</span
+                            ></span
+                          >
+                          <ul
+                            class="select_list scale-y-0 z-10"
+                            data-select-list
+                          >
+                            <li class="select-element">Work</li>
+                            <li class="select-element">Personal</li>
+                            <li class="select-element">Shopping</li>
+                            <li class="select-element">Health</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- priorty -->
+                  <div class="space-y-2">
+                    <span class="input_label inline-block">Priority</span>
+                    <div class="flex items-center gap-3 sm:gap-4">
+                      <!-- priorty normal -->
+                      <label
+                        for="normal"
+                        class="normal group relative cursor-pointer flex-1"
+                      >
+                        <input
+                          type="radio"
+                          name="priority"
+                          id="normal"
+                          class="appearance-none h-full w-full absolute left-0 top-0 cursor-pointer"
+                        />
+
+                        <div
+                          class="priorty-btn group-has-[input:checked]:border-emerald-500/50 group-has-[input:checked]:bg-emerald-500/10 group-has-[input:checked]:text-emerald-400"
+                        >
+                          <i
+                            class="fa-solid fa-circle text-[8px] text-emerald-500"
+                          ></i>
+                          <span class="">normal</span>
+                        </div>
+                      </label>
+                      <!-- priorty important -->
+                      <label
+                        for="important"
+                        class="important group relative cursor-pointer flex-1"
+                      >
+                        <input
+                          type="radio"
+                          name="priority"
+                          id="important"
+                          class="appearance-none h-full w-full absolute left-0 top-0 cursor-pointer"
+                        />
+
+                        <div
+                          class="priorty-btn group-has-[input:checked]:border-amber-500/50 group-has-[input:checked]:bg-amber-500/10 group-has-[input:checked]:text-amber-400"
+                        >
+                          <i
+                            class="fa-solid fa-circle text-[8px] text-amber-500"
+                          ></i>
+                          <span class="">important</span>
+                        </div>
+                      </label>
+                      <!-- priorty urgent -->
+                      <label
+                        for="urgent"
+                        class="urgent group relative cursor-pointer flex-1"
+                      >
+                        <input
+                          type="radio"
+                          name="priority"
+                          id="urgent"
+                          class="appearance-none h-full w-full absolute left-0 top-0 cursor-pointer"
+                        />
+
+                        <div
+                          class="priorty-btn group-has-[input:checked]:border-rose-500/50 group-has-[input:checked]:bg-rose-500/10 group-has-[input:checked]:text-rose-400"
+                        >
+                          <i
+                            class="fa-solid fa-circle text-[8px] text-rose-500"
+                          ></i>
+                          <span class="">urgent</span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- modal footer -->
+                <div class="">
+                  <div
+                    class="p-6 bg-white_5 border-t border-white_10 flex items-center gap-3 justify-end"
+                  >
+                    <!-- cancel -->
+                    <button
+                      type="button"
+                      class="px-8 py-2.5 bg-white_5 rounded-lg text-sm font-bold hover:bg-white_10 duration-200"
+                      data-modal-close
+                    >
+                      Cancel
+                    </button>
+                    <!-- save -->
+                    <button
+                      type="submit"
+                      class="px-6 py-2.5 bg-Vivid_Violet rounded-lg text-sm font-bold hover:bg-Vivid_Violet/90 duration-200"
+                    >
+                      Add Task
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-          <h2 class="bold text-2xl grid items-center">
-            <a href="">Tasker</a>
-          </h2>
-          <i
-            class="fa-solid fa-circle-xmark ml-auto text-xl cursor-pointer p-1 md:hidden"
-            data-nav-toggler
-          ></i>
         </div>
 
-        <!-- navbar -->
-        <div class="mt-8">
-          <p class="capitalize text-[rgba(175,37,244,0.6)]">Main Navigation</p>
-          <ul class="navbar_list mt-2 flex flex-col gap-3">
-            <li class="">
-              <a href="" class="navbar_item active"
-                ><i class="fa-solid fa-calendar"></i>Today</a
-              >
-            </li>
-            <li class="">
-              <a href="" class="navbar_item"
-                ><i class="fa-regular fa-calendar-plus"></i>Upcoming</a
-              >
-            </li>
-            <li>
-              <a href="" class="navbar_item"
-                ><i class="fa-solid fa-circle-check"></i>Completed</a
-              >
-            </li>
-          </ul>
-        </div>
-      </aside>
+        <!--
+          -overlay
+        -->
+        <div class="overlay" data-overlay></div>
+      </div>
     </div>
+
     <script src="./js/main.js" defer></script>
   </body>
 </html>
