@@ -31,6 +31,22 @@ select > option {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-[#3c2249] rounded-full;
 }
+
+/* Styles */
+
+/*
+-- task style ---
+*/
+.tasks {
+  @apply grid gap-4 lg:grid-cols-2;
+}
+.task .task-container {
+  @apply bg-white_5 rounded-lg p-5 border duration-100 border-white_10 group-has-[input:checked]:bg-white_2 h-full;
+}
+
+.task .date {
+  @apply text-gray-400 block mb-1 sm:m-0;
+}
 /* urgent task styles  */
 span.urgent {
   @apply bg-red_500/20
@@ -38,7 +54,7 @@ span.urgent {
   border-red_500/20;
 }
 input.urgent {
-  @apply border-red_500/50 checked:bg-red_500 checked:border-red_500;
+  @apply border-red_500/50 checked:!bg-red_500 checked:!border-red_500;
 }
 
 /* important task styles */
@@ -60,7 +76,20 @@ input.normal {
   @apply border-green_500/50 checked:bg-green_500/80 checked:border-green_500;
 }
 
-/* Styles */
+.task .control {
+  @apply size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200;
+}
+
+.task .delete {
+  @apply hover:bg-red_500/20 hover:text-red_500;
+}
+
+.task .edit {
+  @apply hover:bg-primary/20 hover:text-primary;
+}
+/* 
+  --- aside ---
+*/
 .aside.active {
   @apply translate-x-0;
 }

@@ -72,6 +72,7 @@
                   type="text"
                   class="flex-1 relative text-sm md:text-base z-10 pl-8 py-[7px] md:py-2 bg-white_5 text-white placeholder:text-[#68606C]"
                   placeholder="Search tasks"
+                  data-search-bar
                 />
                 <i
                   class="fas fa-search absolute left-2 z-[1] text-white_30"
@@ -82,6 +83,7 @@
                 aria-label="add task button"
                 class="add_task btn bg-Vivid_Violet rounded-lg py-[7px] flex gap-1 items-center duration-200 hover:brightness-110 text-sm md:text-base"
                 data-modal-active
+                data-add-modal
               >
                 <i class="fa-solid fa-plus"></i>
                 Add Task
@@ -106,28 +108,27 @@
             <div
               class="flex justify-between items-center pb-4 border-b border-white_10"
             >
-              <div class="bg-white_10 p-[6px] w-fit rounded-2xl">
-                <button class="task-option active">all tasks</button>
-                <button class="task-option">active</button>
-                <button class="task-option">done</button>
+              <div
+                class="bg-white_10 p-[6px] w-fit rounded-2xl"
+                id="show-options"
+              >
+                <button class="task-option active" data-tasks-all>
+                  all tasks
+                </button>
+                <button class="task-option" data-tasks-active>active</button>
+                <button class="task-option" data-tasks-done>done</button>
               </div>
-              <div class="sort_by relative flex gap-3 items-center">
+              <div
+                class="sort_by relative flex gap-3 items-center min-w-[130px]"
+              >
                 <span class="uppercase text-xs text-white_40 font-bold"
                   >sort by:</span
                 >
-                <select
-                  name="sort"
-                  id="sort-select"
-                  class="hidden bg-transparent text-[rgb(175_37_244)]"
-                >
-                  <option value="priority">priority</option>
-                  <option value="date">date</option>
-                </select>
 
                 <!-- custom select -->
                 <div class="custom-select" data-custom-select>
-                  <span class="result"
-                    >priority
+                  <span class="flex gap-1">
+                    <span class="result"> priority </span>
                     <span
                       class="arrow inline-block rotate-[270deg] duration-200"
                       data-select-arrow
@@ -135,189 +136,93 @@
                     ></span
                   >
                   <ul class="select_list scale-y-0" data-select-list>
-                    <li class="select-element">priority</li>
-                    <li class="select-element">date</li>
+                    <li class="select-element" data-value="priority">
+                      priority
+                    </li>
+                    <li class="select-element" data-value="date">date</li>
                   </ul>
+                  <input
+                    type="hidden"
+                    name="category"
+                    value="priority"
+                    data-sortBy-select
+                  />
                 </div>
               </div>
             </div>
-            <div class="tasks pt-5 flex flex-col gap-4">
-              <!--
-              -task one
-            -->
-              <div class="task group">
-                <div
-                  class="flex group items-center gap-5 bg-white_5 rounded-lg p-5 border duration-100 border-white_10 group-has-[input:checked]:bg-white_2"
-                >
-                  <label
-                    class="relative peer group cursor-pointer flex items-center justify-center"
-                  >
-                    <input
-                      type="checkbox"
-                      class="appearance-none size-6 rounded-md border-2 cursor-pointer urgent"
-                    />
-                    <i
-                      class="fa-solid fa-check absolute opacity-0 group-has-[:checked]:opacity-100 duration-200"
-                    ></i>
-                  </label>
 
-                  <div class="">
-                    <div class="flex justify-between sm:gap-3 items-center">
-                      <h3
-                        class="task-title text-sm sm:text-base font-bold duration-200 group-has-[input:checked]:line-through group-has-[input:checked]:text-white_40"
-                      >
-                        Project Proposal Revamp
-                      </h3>
-                    </div>
-                    <p
-                      class="text-xs sm:text-sm text-white_40 font-medium mt-0.5 duration-100 group-has-[:checked]:text-white_20"
-                    >
-                      Finish the final draft for the stakeholder meeting on
-                      Thursday.
-                    </p>
-                  </div>
+            <div class="grid gap-4">
+              <div class="tasks" data-tasks-container></div>
 
-                  <div class="flex flex-col gap-3 sm:flex-1 items-end">
-                    <span
-                      class="urgent text-center text-[10px] font-extrabold uppercase py-0.5 px-2 rounded text-primary bg-primary/10 border border-primary/20"
-                      >urgent
-                    </span>
-                    <div
-                      class="task_controls text-white text-xs sm:text-base flex-1 flex items-center justify-end gap-2 sm:opacity-0 group-hover:opacity-100 duration-200"
-                    >
-                      <button
-                        class="delete size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-red_500/20 hover:text-red_500"
+              <template id="task-template">
+                <div class="task group min-h-[140px]">
+                  <div class="task-container">
+                    <span class="date">Oct 23, 2026</span>
+                    <div class="flex items-center gap-5">
+                      <!-- complete button -->
+                      <label
+                        class="relative cursor-pointer flex items-center justify-center"
                       >
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                      <button
-                        class="edit size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-primary/20 hover:text-primary"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!--
-              -task two
-            -->
-              <div class="task group">
-                <div
-                  class="flex group items-center gap-5 bg-white_5 rounded-lg p-5 border duration-100 border-white_10 group-has-[input:checked]:bg-white_2"
-                >
-                  <label
-                    class="relative peer group cursor-pointer flex items-center justify-center"
-                  >
-                    <input
-                      type="checkbox"
-                      class="appearance-none size-6 rounded-md border-2 cursor-pointer normal"
-                    />
-                    <i
-                      class="fa-solid fa-check absolute opacity-0 group-has-[:checked]:opacity-100 duration-200"
-                    ></i>
-                  </label>
+                        <input
+                          data-complete-task
+                          id="complete-task"
+                          type="checkbox"
+                          class="appearance-none size-6 rounded-md border-2 cursor-pointer priorty-class"
+                        />
+                        <i
+                          class="fa-solid fa-check absolute opacity-0 group-has-[:checked]:opacity-100 duration-200"
+                        ></i>
+                      </label>
+                      <!-- info  -->
+                      <div class="">
+                        <div class="flex justify-between sm:gap-3 items-center">
+                          <h3
+                            class="task-title break-all text-sm sm:text-base font-bold duration-200 group-has-[input:checked]:line-through group-has-[input:checked]:text-white_40"
+                          >
+                            Project Proposal Revamp
+                          </h3>
+                        </div>
+                        <p
+                          class="task-description break-all text-xs sm:text-sm text-white_40 font-medium mt-0.5 duration-100 group-has-[:checked]:text-white_20"
+                        >
+                          Finish the final draft for the stakeholder meeting on
+                          Thursday.
+                        </p>
+                      </div>
+                      <!-- controls -->
+                      <div class="flex flex-col gap-3 flex-1 items-end">
+                        <span
+                          class="task-category priorty-class text-center text-[10px] font-extrabold uppercase py-0.5 px-2 rounded text-primary bg-primary/10 border border-primary/20"
+                          >urgent
+                        </span>
 
-                  <div class="">
-                    <div class="flex justify-between sm:gap-3 items-center">
-                      <h3
-                        class="task-title text-sm sm:text-base font-bold duration-200 group-has-[input:checked]:line-through group-has-[input:checked]:text-white_40"
-                      >
-                        Project Proposal Revamp
-                      </h3>
-                    </div>
-                    <p
-                      class="text-xs sm:text-sm text-white_40 font-medium mt-0.5 duration-100 group-has-[:checked]:text-white_20"
-                    >
-                      Finish the final draft for the stakeholder meeting on
-                      Thursday.
-                    </p>
-                  </div>
-
-                  <div class="flex flex-col gap-3 sm:flex-1 items-end">
-                    <span
-                      class="normal text-center text-[10px] font-extrabold uppercase py-0.5 px-2 rounded text-primary bg-primary/10 border border-primary/20"
-                      >normal
-                    </span>
-                    <div
-                      class="task_controls text-white text-xs sm:text-base flex-1 flex items-center justify-end gap-2 sm:opacity-0 group-hover:opacity-100 duration-200"
-                    >
-                      <button
-                        class="delete size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-red_500/20 hover:text-red_500"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                      <button
-                        class="edit size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-primary/20 hover:text-primary"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                      </button>
+                        <div
+                          class="task_controls text-white text-xs sm:text-base flex-1 flex items-center justify-end gap-2 sm:opacity-0 group-hover:opacity-100 duration-200 group-has-[:checked]:opacity-0 group-has-[:checked]:pointer-events-none"
+                        >
+                          <button class="control delete" data-delete-task>
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+                          <button
+                            class="control edit"
+                            data-modal-active
+                            data-edit-task
+                          >
+                            <i class="fa-solid fa-pen"></i>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </template>
               <!--
-              -task three
-            -->
-              <div class="task group">
-                <div
-                  class="flex group items-center gap-5 bg-white_5 rounded-lg p-5 border duration-100 border-white_10 group-has-[input:checked]:bg-white_2"
-                >
-                  <label
-                    class="relative peer group cursor-pointer flex items-center justify-center"
-                  >
-                    <input
-                      type="checkbox"
-                      class="appearance-none size-6 rounded-md border-2 cursor-pointer important"
-                    />
-                    <i
-                      class="fa-solid fa-check absolute opacity-0 group-has-[:checked]:opacity-100 duration-200"
-                    ></i>
-                  </label>
-
-                  <div class="">
-                    <div class="flex justify-between sm:gap-3 items-center">
-                      <h3
-                        class="task-title text-sm sm:text-base font-bold duration-200 group-has-[input:checked]:line-through group-has-[input:checked]:text-white_40"
-                      >
-                        Project Proposal Revamp
-                      </h3>
-                    </div>
-                    <p
-                      class="text-xs sm:text-sm text-white_40 font-medium mt-0.5 duration-100 group-has-[:checked]:text-white_20"
-                    >
-                      Finish the final draft for the stakeholder meeting on
-                      Thursday.
-                    </p>
-                  </div>
-
-                  <div class="flex flex-col gap-3 sm:flex-1 items-end">
-                    <span
-                      class="important text-center text-[10px] font-extrabold uppercase py-0.5 px-2 rounded text-primary bg-primary/10 border border-primary/20"
-                      >important
-                    </span>
-                    <div
-                      class="task_controls text-white text-xs sm:text-base flex-1 flex items-center justify-end gap-2 sm:opacity-0 group-hover:opacity-100 duration-200"
-                    >
-                      <button
-                        class="delete size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-red_500/20 hover:text-red_500"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                      <button
-                        class="edit size-7 sm:size-9 bg-white_5 rounded-lg border border-white_10 duration-200 hover:bg-primary/20 hover:text-primary"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+                -add task
+              -->
               <div class="add-task">
                 <button
                   class="group flex flex-col items-center gap-2 w-full rounded-lg p-5 border-2 border-dashed duration-200 border-white_10 group-has-[input:checked]:bg-white_2 hover:bg-white_2 hover:border-primary/50"
                   data-modal-active
+                  data-add-modal
                 >
                   <div
                     class="plus-icon text-3xl size-11 rounded-full bg-white_5 flex items-center justify-center duration-200 group-hover:text-primary group-hover:bg-primary/20"
@@ -402,7 +307,7 @@
                 <div class="p-[4px_10px] bg-primary/20 rounded-lg text-primary">
                   <i class="fas fa-edit"></i>
                 </div>
-                <p>add task</p>
+                <p data-modal-title>add task</p>
               </div>
               <button
                 class="text-slate-400 rounded-full size-8 text-xl duration-150 hover:text-white hover:bg-white_5"
@@ -417,55 +322,57 @@
           -->
 
             <div>
-              <form action="">
+              <form action="" id="task-form">
                 <div
                   class="custom-scrollbar p-5 space-y-6 max-h-[50vh] overflow-y-auto"
                 >
                   <!-- task title -->
                   <div class="space-y-2">
-                    <label class="input_label" for="task-title"
-                      >Task Title</label
-                    >
+                    <label class="input_label" for="title">Task Title</label>
                     <input
+                      name="title"
                       type="text"
                       id="task-title"
                       placeholder="What needs to be done"
+                      required
                     />
                   </div>
                   <!-- Description -->
                   <div class="space-y-2">
-                    <label class="input_label" for="task-description"
+                    <label class="input_label" for="description"
                       >Description</label
                     >
                     <textarea
-                      name="input-description"
+                      name="description"
                       id="task-description"
                       rows="3"
                       placeholder="Add more details about this task"
                       class="resize-none"
+                      required
                     ></textarea>
                   </div>
                   <!-- category and date -->
                   <div class="flex items-center gap-5">
                     <!-- date -->
                     <div class="space-y-2 flex-1">
-                      <label class="input_label" for="task-date"
-                        >Due Date</label
-                      >
+                      <label class="input_label" for="date">Due Date</label>
                       <input
+                        required
                         type="date"
                         id="task-date"
+                        name="date"
                         class="bg-transparent text-sm"
+                        min="03/13/2026"
                       />
                     </div>
                     <!--  category  -->
-                    <div class="space-y-2 flex-1">
-                      <label class="input_label inline-block">Category</label>
+                    <div class="flex-1 space-y-2">
+                      <span class="input_label inline-block"> Category </span>
                       <!-- custom select -->
                       <div class="category relative !p-0">
-                        <div class="custom-select !p-[13px]" data-custom-select>
-                          <span class="result"
-                            >Work
+                        <div class="custom-select !p-[9px]" data-custom-select>
+                          <span class="flex gap-1">
+                            <span class="result"> Work </span>
                             <span
                               class="arrow inline-block rotate-[270deg] duration-200"
                               data-select-arrow
@@ -476,11 +383,29 @@
                             class="select_list scale-y-0 z-10"
                             data-select-list
                           >
-                            <li class="select-element">Work</li>
-                            <li class="select-element">Personal</li>
-                            <li class="select-element">Shopping</li>
-                            <li class="select-element">Health</li>
+                            <li class="select-element" data-value="Work">
+                              Work
+                            </li>
+
+                            <li class="select-element" data-value="Personal">
+                              Personal
+                            </li>
+                            <li class="select-element" data-value="Shopping">
+                              Shopping
+                            </li>
+                            <li class="select-element" data-value="Health">
+                              Health
+                            </li>
                           </ul>
+
+                          <input type="hidden" value="work" name="category" />
+
+                          <!-- <input
+                              type="hidden"
+                              name="category"
+                              value="Work"
+                              id="task-category"
+                            /> -->
                         </div>
                       </div>
                     </div>
@@ -497,8 +422,10 @@
                         <input
                           type="radio"
                           name="priority"
+                          value="normal"
                           id="normal"
                           class="appearance-none h-full w-full absolute left-0 top-0 cursor-pointer"
+                          checked
                         />
 
                         <div
@@ -518,6 +445,7 @@
                         <input
                           type="radio"
                           name="priority"
+                          value="important"
                           id="important"
                           class="appearance-none h-full w-full absolute left-0 top-0 cursor-pointer"
                         />
@@ -539,6 +467,7 @@
                         <input
                           type="radio"
                           name="priority"
+                          value="urgent"
                           id="urgent"
                           class="appearance-none h-full w-full absolute left-0 top-0 cursor-pointer"
                         />
@@ -572,9 +501,8 @@
                     <button
                       type="submit"
                       class="px-6 py-2.5 bg-Vivid_Violet rounded-lg text-sm font-bold hover:bg-Vivid_Violet/90 duration-200"
-                    >
-                      Add Task
-                    </button>
+                      data-modal-submit
+                    ></button>
                   </div>
                 </div>
               </form>
